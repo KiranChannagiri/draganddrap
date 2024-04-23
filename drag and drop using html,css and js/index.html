@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Drag and Drop using HTML,CSS and JS</title>
+        <link rel="stylesheet" href="style.css">
+    </head>
+    <body>
+        
+        <div class="container">
+
+            <!-- The draggable attribute specifies whether an element is draggable or not.
+            Tip: Links and images are draggable by default. -->
+            <div id="leftdiv">
+                <div id="Box-1" class="boxes" draggable="true"><span>Box-1</span></div>
+                <div id="Box-2" class="boxes" draggable="true"><span>Box-2</span></div>
+                <div id="Box-3" class="boxes" draggable="true"><span>Box-3</span></div>
+                <div id="Box-4" class="boxes" draggable="true"><span>Box-4</span></div>
+            </div>
+            <div id="rightdiv"></div>
+        </div>
+
+
+        <script src="script.js"></script>
+    </body>
+</html>
+<!-- The line `e.preventDefault();` inside the `dragover` event listener function serves an important purpose in this context.
+
+In HTML5 drag and drop operations, the `dragover` event is fired continuously as long as the draggable element is being dragged over a valid drop target. By default, most browsers do not allow dropping elements into other elements. Therefore, in order to enable dropping, you need to prevent the default behavior of the browser for the `dragover` event. This default behavior typically involves not allowing dropping.
+
+So, by calling `e.preventDefault();`, you're telling the browser not to use its default behavior for the `dragover` event, which effectively enables dropping elements into the `rightdiv` element. Without this line of code, the drop event might not be triggered or the drop might not be allowed by the browser.
+Certainly! Let's break down the code step by step:
+
+1. `for (let box of boxes) {`: This loop iterates over each element in the `boxes` NodeList. The `boxes` NodeList likely contains HTML elements that have a class of "boxes".
+
+2. Inside the loop:
+
+   a. `box.addEventListener("dragstart", function(e) { ... });`: This attaches a `dragstart` event listener to each `box` element. When a box is being dragged, this event listener function is triggered.
+
+   b. `selected = e.target;`: When a box is being dragged (`dragstart` event), this line assigns the dragged element (`e.target`) to the `selected` variable. This variable is declared outside of this loop, so it's accessible globally.
+
+   c. `rightdiv.addEventListener("dragover", function(e) { ... });`: This attaches a `dragover` event listener to the `rightdiv` element. This event listener function prevents the default behavior of the browser when an element is dragged over `rightdiv`. By default, browsers do not allow dropping elements, so we need to prevent this default behavior.
+
+   d. `rightdiv.addEventListener("drop", function(e) { ... });`: This attaches a `drop` event listener to the `rightdiv` element. This event listener function is triggered when an element is dropped onto `rightdiv`. Inside this function, we prevent the default behavior of the browser (which would be to open the dropped element as a link or something similar), and then we append the `selected` element (the dragged element) to `rightdiv`. Finally, we set `selected` to `null` to clear it, indicating that no element is currently selected.
+
+So, in summary, this code sets up drag-and-drop functionality where elements with the class "boxes" can be dragged and dropped into the `rightdiv` element. -->
